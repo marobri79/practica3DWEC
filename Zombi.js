@@ -1,4 +1,5 @@
 /* Constructor de armas */
+var control;
 var Arma = function(nombre, potencia) {
   this.nombre = nombre;
   this.potencia = potencia;
@@ -91,23 +92,40 @@ var z = new Zombi();
 var granada = new Arma('Granada',20)
 var pistola = new ArmaConMunicion('Pistola',10,6);
 console.log("Bienvenido a StuDOOM v1.0");
+var g = document.getElementById('granada');
 
-granada.onclick =jugador.equipar(granada);
-pistola.onclick =jugador.equipar(pistola);
+var f =g.addEventListener("click",function() {
+	
+	jugador.equipar(granada);
+});
+var p= document.getElementById('pistola');
 
-window.addEventListener("keydown", function(event){
-    if (event.key == "d") {
-		for (let i = 0; i < mochila.length; i++) {
-			jugador.mochila(i).atacar(Zombi);
+var f =p.addEventListener("click",function() {
+	 control = 1;
+	
+	jugador.equipar(pistola);
+});
+
+
+window.addEventListener("keypress", function(event){
+    if (event.key == "r") {
+	/*	for (let i = 0; i < mochila.length; i++) {
+			if (jugador.mochila.armas[i]==pistola){
+				
+			}
 			
+		}*/
+		if(control==1) {
+			pistola.recargar()
+		} else {
+			console.log('¡No se puede recargar!')
 		}
-        
     }
 });
-window.addEventListener("keyup", function(event){
-    if (event.key == "r") {
-		for (let i = 0; i < mochila.length; i++) {
-		mochila(i).recargar
+window.addEventListener("keypress", function(event){
+    if (event.key == "d") {
+		
+	jugador.atacar('zombi');
 		}
-    }
+    
 });
